@@ -1,0 +1,49 @@
+[
+    {
+      "id_part": "1",
+      "name": "Partido A",
+      "localidades": [
+        {
+          "id_loc": "1",
+          "name": "Localidad A",
+          "barrios": [
+            {"id_bar": "1", "name": "Barrio 1"},
+            {"id_bar": "2", "name": "Barrio 2"},
+            {"id_bar": "3", "name": "Barrio 3"}
+          ]
+        },
+        {
+          "id_loc": "2",
+          "name": "Localidad B",
+          "barrios": [
+            {"id_bar": "4", "name": "Barrio 4"},
+            {"id_bar": "5", "name": "Barrio 5"},
+            {"id_bar": "6", "name": "Barrio 6"}
+          ]
+        },
+        {
+          "id_loc": "3",
+          "name": "Localidad C",
+          "barrios": [
+            {"id_bar": "7", "name": "Barrio 7"},
+            {"id_bar": "8", "name": "Barrio 8"},
+            {"id_bar": "9", "name": "Barrio 9"}
+          ]
+        }
+      ]
+    },
+    {
+      "id_part": "2",
+      "name": "Límite Partido A - Partido B",
+      "localidades": [
+        {"id_loc": "4", "name": "Otra Localidad", "barrios": [{"id_bar": "10", "name": "Otro Barrio"}]}
+      ]
+    },
+    {
+      "id_part": "3",
+      "name": "Límite Partido A - Partido C",
+      "localidades": [
+        {"id_loc": "5", "name": "Otra Localidad", "barrios": [{"id_bar": "11", "name": "Otro Barrio"}]}
+      ]
+    }
+  ]
