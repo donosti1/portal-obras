@@ -33,6 +33,7 @@ const Navbar: React.FC = (props) => {
           <Stack alignItems="center" direction="row" justifyContent="space-between">
             <Stack alignItems="center" direction="row">
               <Link to="/">
+                <Text>Home</Text>
                 {
                   //<Image flex={1} height={20} objectFit="contain" src={logo} width={320} />
                 }

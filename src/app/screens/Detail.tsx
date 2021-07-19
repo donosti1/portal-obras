@@ -3,14 +3,19 @@ import {Box, Container, Flex, Link, Stack, Text} from "@chakra-ui/react";
 import {useParams} from "react-router-dom";
 import {ReactCompareSlider, ReactCompareSliderImage} from "react-compare-slider";
 import {MapContainer, TileLayer, Marker, Popup, useMap, Polyline} from "react-leaflet";
+
 import "leaflet/dist/leaflet.css";
-import icon from "leaflet/dist/images/marker-icon.png";
+//import icon from "leaflet/dist/images/marker-icon.png";
+import icon from "/assets/map-markers/obras.png";
+
 import L from "leaflet";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
 
 let DefaultIcon = L.icon({
   iconUrl: icon,
   shadowUrl: iconShadow,
+  iconSize: [28, 40],
+  iconAnchor: [14, 40],
 });
 
 import obrasRaw from "../obras.json";
@@ -60,64 +65,43 @@ const Detail: React.FC = () => {
           </Text>
           <Stack direction="row">
             <Stack width={96}>
-              <Stack height={72}>
+              <Stack>
                 <Text color="black" fontSize={18} fontWeight="900">
                   Ubicación
                 </Text>
-                <MapContainer
-                  center={[-34.441796, -58.6453]}
-                  scrollWheelZoom={false}
-                  style={{height: "500px"}}
-                  zoom={11}
-                >
-                  <TileLayer
-                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  />
-                  {obra.map((it: any) => {
-                    if (it.tipoRepresentacion == 1) {
-                      return (
-                        <Marker key={it.id_marc} position={[it.lat, it.long]}>
-                          <Popup>{obra[0].obra}</Popup>
-                        </Marker>
-                      );
-                    } else if (it.tipoRepresentacion == 2) {
-                      return (
-                        <Polyline key={it.id_marc} positions={it.polylineRunRep}>
-                          <Popup>{obra[0].obra}</Popup>
-                        </Polyline>
-                      );
-                    }
-                  })}
-                </MapContainer>
+                <Stack height={72} paddingTop={4} width={96}>
+                  <MapContainer
+                    center={[-34.441796, -58.6453]}
+                    scrollWheelZoom={false}
+                    style={{height: "500px"}}
+                    zoom={11}
+                  >
+                    <TileLayer
+                      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    {obra.map((it: any) => {
+                      if (it.tipoRepresentacion == 1) {
+                        return (
+                          <Marker key={it.id_marc} icon={DefaultIcon} position={[it.lat, it.long]}>
+                            <Popup>{obra[0].obra}</Popup>
+                          </Marker>
+                        );
+                      } else if (it.tipoRepresentacion == 2) {
+                        return (
+                          <Polyline key={it.id_marc} positions={it.polylineRunRep}>
+                            <Popup>{obra[0].obra}</Popup>
+                          </Polyline>
+                        );
+                      }
+                    })}
+                  </MapContainer>
+                </Stack>
               </Stack>
               <Stack>
-                <Text color="black" fontSize={18} fontWeight="900">
-                  Comparación
+                <Text color="black" fontSize={18} fontWeight="900" textAlign="center">
+                  Localidad: {localidad_obra}
                 </Text>
-                <ReactCompareSlider
-                  itemOne={
-                    <ReactCompareSliderImage
-                      alt="Image one"
-                      srcSet="https://images.unsplash.com/photo-1580458148391-8c4951dc1465?auto=format&fit=crop&w=1500&q=80"
-                      style={{filter: "grayscale(1)"}}
-                    />
-                  }
-                  itemTwo={
-                    <ReactCompareSliderImage
-                      alt="Image two"
-                      src="https://images.unsplash.com/photo-1580458148391-8c4951dc1465?auto=format&fit=crop&w=1500&q=80"
-                      srcSet="https://images.unsplash.com/photo-1580458148391-8c4951dc1465?auto=format&fit=crop&w=1500&q=80"
-                    />
-                  }
-                />
-              </Stack>
-            </Stack>
-            <Stack spacing={4} width="100%">
-              <Text color="black" fontSize={18} fontWeight="900" textAlign="center">
-                Localidad: {localidad_obra}
-              </Text>
-              <Stack padding={4}>
                 <Text color="black" fontSize={18} fontWeight="900">
                   Descripción de la obra:
                 </Text>
@@ -139,11 +123,35 @@ const Detail: React.FC = () => {
                   })}
                 </Text>
                 <Text color="black" fontSize={16}>
-                  Avance: {obra[0].avance}
+                  Avance: {obra[0].avance}%
                 </Text>
                 <Text color="black" fontSize={16}>
                   Contratista: {obra[0].contratista}
                 </Text>
+              </Stack>
+            </Stack>
+            <Stack width="100%">
+              <Text color="black" fontSize={18} fontWeight="900" textAlign="center">
+                Comparación
+              </Text>
+              <Stack padding={4}>
+                <ReactCompareSlider
+                  itemOne={
+                    <ReactCompareSliderImage
+                      alt="Image two"
+                      src="https://images.unsplash.com/photo-1580458148391-8c4951dc1465?auto=format&fit=crop&w=1500&q=80"
+                      srcSet={`/assets/detail/` + obra[0].fotoDespues}
+                    />
+                  }
+                  itemTwo={
+                    <ReactCompareSliderImage
+                      alt="Image one"
+                      srcSet={`/assets/detail/` + obra[0].fotoAntes}
+                      //style={{filter: "grayscale(1)"}}
+                    />
+                  }
+                  position={15}
+                />
               </Stack>
             </Stack>
           </Stack>
