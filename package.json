@@ -1,12 +1,14 @@
 {
-  "homepage": "https://donosti1.github.io/portal-obras",
+  "homepage": "https://donosti1.github.io/portal-obras/",
   "name": "portal-obras",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview",
-    "theme": "chakra-cli tokens ./src/theme.ts"
+    "theme": "chakra-cli tokens ./src/theme.ts",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.5.2",
